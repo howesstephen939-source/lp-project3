@@ -21,7 +21,7 @@ interface PriceChartProps {
   currentPrice: number;
 }
 
-export const PriceChart: React.FC<PriceChartProps> = ({ data, minPrice, maxPrice, currentPrice }) => {
+export const PriceChart: React.FC<PriceChartProps> = ({ data, minPrice, maxPrice }) => {
   
   // Calculate the domain to ensure the Range Lines are always visible
   const domain = useMemo(() => {
@@ -147,10 +147,11 @@ export const LiquidityChart: React.FC<LiquidityChartProps> = ({ data, minPrice, 
           cursor={{fill: 'rgba(255,255,255,0.05)'}}
           content={({ active, payload }) => {
             if (active && payload && payload.length) {
+              const value = payload[0].value as number;
               return (
                 <div className="bg-slate-900 border border-slate-700 p-3 text-xs rounded-xl shadow-xl backdrop-blur-md bg-slate-900/90">
                   <p className="text-slate-400 mb-1">Price: <span className="text-slate-50 font-mono">{payload[0].payload.price.toFixed(2)}</span></p>
-                  <p className="text-slate-400">Liquidity: <span className="text-amber-400 font-mono">{payload[0].value?.toFixed(0)}</span></p>
+                  <p className="text-slate-400">Liquidity: <span className="text-amber-400 font-mono">{value?.toFixed(0)}</span></p>
                 </div>
               );
             }
