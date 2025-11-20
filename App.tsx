@@ -68,6 +68,10 @@ function App() {
 
   const dailyFee = (depositAmount * (estimatedApr / 100)) / 365;
 
+  // Calculate dynamic percentages for the range adjusters
+  const minPricePct = ((minPrice - currentPrice) / currentPrice) * 100;
+  const maxPricePct = ((maxPrice - currentPrice) / currentPrice) * 100;
+
   const adjustMin = (deltaPercent: number) => {
     setMinPrice(prev => prev * (1 + deltaPercent / 100));
   };
@@ -165,7 +169,7 @@ function App() {
                     {formatNum(minPrice)}
                   </div>
                   <div className="flex justify-center gap-2">
-                    <RangeAdjuster onDecrease={() => adjustMin(-1)} onIncrease={() => adjustMin(1)} percentage={-10.00} />
+                    <RangeAdjuster onDecrease={() => adjustMin(-1)} onIncrease={() => adjustMin(1)} percentage={minPricePct} />
                   </div>
                 </div>
                 <div>
@@ -174,7 +178,7 @@ function App() {
                     {formatNum(maxPrice)}
                   </div>
                   <div className="flex justify-center gap-2">
-                    <RangeAdjuster onDecrease={() => adjustMax(-1)} onIncrease={() => adjustMax(1)} percentage={10.00} />
+                    <RangeAdjuster onDecrease={() => adjustMax(-1)} onIncrease={() => adjustMax(1)} percentage={maxPricePct} />
                   </div>
                 </div>
               </div>

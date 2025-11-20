@@ -54,12 +54,15 @@ interface RangeAdjusterProps {
 }
 
 export const RangeAdjuster: React.FC<RangeAdjusterProps> = ({ onDecrease, onIncrease, percentage }) => {
+  // Determine color based on positive/negative
+  const colorClass = percentage >= 0 ? 'text-emerald-400' : 'text-amber-400';
+  
   return (
     <div className="flex items-center gap-1 mt-2">
        <button onClick={onDecrease} className="p-1 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-400/50 text-slate-400 transition-colors hover:text-amber-300 active:scale-95">
          <Icons.Minus size={12} />
        </button>
-       <div className="bg-slate-950/50 border border-slate-800 px-2 py-1 rounded-md text-xs text-slate-300 font-mono min-w-[60px] text-center">
+       <div className={`bg-slate-950/50 border border-slate-800 px-2 py-1 rounded-md text-xs font-mono min-w-[60px] text-center ${colorClass}`}>
          {percentage > 0 ? '+' : ''}{percentage.toFixed(2)}
        </div>
        <span className="text-xs text-slate-500">%</span>
