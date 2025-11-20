@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Liquidity Position Simulator",
+  "description": "A Uniswap V3 style concentrated liquidity simulator to estimate fees and visualize price ranges.",
+  "requestFramePermissions": []
+}
